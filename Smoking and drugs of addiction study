@@ -1,4 +1,5 @@
       ###Smoking and drugs of addiction study
+      ##Multiple logistic regression
 
 ## Assigning meaningful labels and definitions to variables
 label variable id "Participant identification number" 
@@ -31,7 +32,7 @@ tab ecig
 ## Linearity assumption
 twoway (scatter age bmi) || lfit age bmi, ytitle(Age (years)) title(Distribution of age and BMI) leg(off)
 
-## 1.2 Univariate simple linear logistic models
+## 1.2 Univariate simple logistic regression models
 logistic ecig i.sex
 logistic ecig age
 logistic ecig bmi
@@ -42,7 +43,7 @@ logistic ecig i.alcohol
 testparm i.alcohol
 logistic ecig i.exercise
 
-## 1.3 Multiple linear logistic model
+## 1.3 Multiple logistic regression model
 logistic ecig age bmi i.campus i.smoke i.alcohol ** Base model **
 estimates store base
 ## Calculating variance inflation factors
@@ -136,7 +137,6 @@ recode age (min/64=1 "60-64 years old") (65/69=2 "65 to 69 years old") (70/74=3 
 sts test home_size, strata(age)
 sts test home_size, strata(agegp)
 
-Question 2c)
 stphplot, by(home_size) nolntime xtitle(Years) title("Log-minus-log plot for home size") legend(label(1 "1 person") label(2 "2 people") label(3 "3 or more people"))
 ## assessing potential confounding and effect modification
 ## univariate Cox hazard regression
@@ -156,11 +156,9 @@ estat phtest, plot(2.home_size) yline(0) xtitle(time(years)) ytitle(scaled schoe
 estat phtest, plot(3.home_size) yline(0) xtitle(time(years)) ytitle(scaled schoenfeld – 3 or more people) title(schoenfeld residual plot for 3 or more people)
 estat phtest, plot(age) yline(0) xtitle(time(years)) ytitle(scaled schoenfeld – age(years)) title (schoenfeld residual plot for age)
 estat phtest, detail
-
 ## Creating survival curve
 stcox i.home_size age, efron
 stcurve, survival at1(home_size=1 age=70) at2(home_size=2 age=70) at3(home_size=3 age=70) yline(0.5, lwidth(0.1)) xtitle(time(years)) ytitle(event probability) title(cox proportional hazard regression curve by home size) legend(label(1 "1 person") label(2 "2 people") label(3 "3 or more people"))
-
 ## Predicting the survival probabilites for a 70 year participant using the survci package
 survci, at(home_size=1 age=70) outfile(home_size1.dta, replace) nodraw
 survci, at(home_size=2 age=70) outfile(home_size2.dta, replace) nodraw
