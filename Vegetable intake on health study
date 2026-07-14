@@ -1,4 +1,5 @@
       ###Vegetable intake on health study
+      ##Multiple linear regression model
 
     ##The following can be considered direct input into the Stata command box
 . label variable id "Participant identification number"
@@ -30,7 +31,6 @@ Optional:
     ##Comment: The first line can be used as supplement to understand the Pearson’s correlation coefficients between the ‘vegwk’ and the explanatory variables. The second line can be used to have a health rating of 5 (Poor) as the reference point to avoid negative coefficients.
 
       ###Computer use and Vitamin D levels study
-
     ##Assigning meaningful labels and definitions to variables
 label variable id "Participant identification number"
 label variable vitd "Serum Vitamin D, nmol/L"
